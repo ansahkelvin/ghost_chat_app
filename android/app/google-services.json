@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "290901232291",
+    "project_id": "ghost-ff3ce",
+    "storage_bucket": "ghost-ff3ce.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:290901232291:android:1418f81fcf69402c664d16",
+        "android_client_info": {
+          "package_name": "com.example.ghost"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "290901232291-8b49ktn4ka7abdn204jdn9doicct6jcp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.ghost",
+            "certificate_hash": "d4ccc0d79e5dc8efa5766a9ece26d5a6895f3cff"
+          }
+        },
+        {
+          "client_id": "290901232291-s4e8rmi2slst48nr0rlobctaodtv1546.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBejGcHUKyVjPT4j66HdQLF_JzE7473je0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "290901232291-s4e8rmi2slst48nr0rlobctaodtv1546.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
