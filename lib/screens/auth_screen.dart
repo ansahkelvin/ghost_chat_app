@@ -9,13 +9,25 @@ class AuthScreen extends StatefulWidget {
 }
 
 class _AuthScreenState extends State<AuthScreen> {
+  Future<void> submitForm(
+    String name,
+    String email,
+    String password,
+    bool isLogin,
+  ) async {
+    
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Authentication"),
+      backgroundColor: Colors.grey[100],
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children:  [
+          AuthForm(onSubmit:submitForm),
+        ],
       ),
-      body: const AuthForm(),
     );
   }
 }
