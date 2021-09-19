@@ -4,13 +4,18 @@ import 'package:ghost/helpers/validators.dart';
 import 'package:lottie/lottie.dart';
 
 class AuthForm extends StatefulWidget {
-  const AuthForm({Key? key, required this.onSubmit}) : super(key: key);
-
+  const AuthForm({
+    Key? key,
+    required this.onSubmit,
+    required this.isLoading,
+  }) : super(key: key);
+  final bool isLoading;
   final Future<void> Function(
     String name,
     String email,
     String password,
     bool isLogin,
+    BuildContext context,
   ) onSubmit;
 
   @override
@@ -34,6 +39,7 @@ class _AuthFormState extends State<AuthForm> {
         email,
         password,
         isLogin,
+        context,
       );
     }
     return;
@@ -92,7 +98,7 @@ class _AuthFormState extends State<AuthForm> {
                       TextFormField(
                         key: const ValueKey("email"),
                         validator: (value) => Validator.emailValidator(value!),
-                        onSaved: (value) => name = value!,
+                        onSaved: (value) => email = value!,
                         keyboardType: TextInputType.emailAddress,
                         decoration: const InputDecoration(
                           labelText: "Email",
@@ -102,7 +108,7 @@ class _AuthFormState extends State<AuthForm> {
                         key: const ValueKey("password"),
                         validator: (value) =>
                             Validator.passwordValidator(value!),
-                        onSaved: (value) => name = value!,
+                        onSaved: (value) => password = value!,
                         keyboardType: TextInputType.emailAddress,
                         obscureText: true,
                         decoration: const InputDecoration(
@@ -112,15 +118,17 @@ class _AuthFormState extends State<AuthForm> {
                       const SizedBox(
                         height: 12,
                       ),
-                      ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          minimumSize: const Size(210, 50),
-                        ),
-                        onPressed: () {
-                          validate();
-                        },
-                        child: Text(isLogin ? "Login" : "Register"),
-                      ),
+                      widget.isLoading
+                          ? const CircularProgressIndicator()
+                          : ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                minimumSize: const Size(210, 50),
+                              ),
+                              onPressed: () {
+                                validate();
+                              },
+                              child: Text(isLogin ? "Login" : "Register"),
+                            ),
                       TextButton(
                         onPressed: () {
                           setState(() {

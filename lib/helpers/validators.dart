@@ -2,7 +2,7 @@ class Validator {
   static dynamic emailValidator(String value) {
     if (value.isEmpty) {
       return 'Email cannot be empty';
-    } else if (value.contains("@")) {
+    } else if (!value.contains("@")) {
       return 'Enter a valid email address';
     }
   }
@@ -15,11 +15,10 @@ class Validator {
     }
   }
 
-  static dynamic passwordValidator(String value){
-     if (value.isEmpty) {
+  static dynamic passwordValidator(String value) {
+    if (value.isEmpty) {
       return 'Password cannot be empty';
-    }
-    else if(value.length < 5) {
+    } else if (value.length < 5) {
       return 'Password is too short';
     }
   }
