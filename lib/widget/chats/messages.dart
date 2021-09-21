@@ -14,7 +14,6 @@ class _MessagesState extends State<Messages> {
   @override
   Widget build(BuildContext context) {
     final uid = FirebaseAuth.instance.currentUser!.uid;
-
     return StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
       stream: FirebaseFirestore.instance
           .collection('chat')
@@ -25,13 +24,13 @@ class _MessagesState extends State<Messages> {
           return const Center(child: CircularProgressIndicator());
         }
         final chatDocs = snapshot.data!.docs;
-
         return ListView.builder(
           reverse: true,
           itemCount: snapshot.data!.docs.length,
           itemBuilder: (context, index) => MessageBubble(
             message: chatDocs[index]["text"],
             isMe: chatDocs[index]["userId"] == uid,
+            userName: chatDocs[index]["userName"],           
             key:ValueKey(chatDocs[index].id),
           ),
         );

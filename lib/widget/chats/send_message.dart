@@ -12,14 +12,20 @@ class SendMessage extends StatefulWidget {
 class _SendMessageState extends State<SendMessage> {
   String message = '';
   final controller = TextEditingController();
-  Future<void> send()async {
+  Future<void> send() async {
     FocusScope.of(context).unfocus();
-    final user =  FirebaseAuth.instance.currentUser;
+    final user = FirebaseAuth.instance.currentUser!;
+    final userData = await FirebaseFirestore.instance
+        .collection("users")
+        .doc(user.uid)
+        .get();
     FirebaseFirestore.instance.collection("chat").add({
       "text": message,
       "createdAt": Timestamp.now(),
-      "userId": user!.uid,
+      "userId": user.uid,
+      "userName": userData["Name"],
     });
+
     controller.clear();
   }
 

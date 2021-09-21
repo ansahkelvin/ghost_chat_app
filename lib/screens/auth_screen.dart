@@ -38,33 +38,27 @@ class _AuthScreenState extends State<AuthScreen> {
           email: email,
           password: password,
         );
+         await FirebaseFirestore.instance.collection("users").doc(credential.user!.uid).set({
+        "Name": name,
+        "email": email,
+      });
       }
-      await FirebaseFirestore.instance.collection("users").add({
-        "Name": name.trim(),
-        "email": email.trim(),
-      });
-      setState(() {
-        isLoading = false;
-      });
-    } on PlatformException catch (e) {
-      setState(() {
-        isLoading = false;
-      });
+     
+      
+    } on FirebaseException catch (e) {
+      // setState(() {
+      //   isLoading = false;
+      // });
       var message = "An Error occured";
       if (e.message != null) {
         message = e.message!;
       }
-
       // ScaffoldMessenger.of(context).showSnackBar(
       //   SnackBar(
       //     content: Text(message),
       //   ),
       // );
-    } catch (e) {
-      
-      print(e.toString());
-      
-    }
+    } 
   }
 
   @override
