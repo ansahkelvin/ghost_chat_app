@@ -61,14 +61,9 @@ class _AuthScreenState extends State<AuthScreen> {
       //   ),
       // );
     } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(e.toString()),
-        ),
-      );
-      setState(() {
-        isLoading = false;
-      });
+      
+      print(e.toString());
+      
     }
   }
 
@@ -76,12 +71,17 @@ class _AuthScreenState extends State<AuthScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey[100],
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          AuthForm(onSubmit: submitForm, isLoading: isLoading),
-        ],
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const SizedBox(
+              height: 50,
+            ),
+            AuthForm(onSubmit: submitForm, isLoading: isLoading),
+          ],
+        ),
       ),
     );
   }

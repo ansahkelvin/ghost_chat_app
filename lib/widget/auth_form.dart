@@ -29,6 +29,7 @@ class _AuthFormState extends State<AuthForm> {
   String password = '';
   bool isLogin = false;
 
+
   void validate() {
     final key = _formKey.currentState!;
     FocusScope.of(context).unfocus();
@@ -44,6 +45,8 @@ class _AuthFormState extends State<AuthForm> {
     }
     return;
   }
+
+  
 
   @override
   Widget build(BuildContext context) {

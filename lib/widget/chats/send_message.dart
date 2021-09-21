@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class SendMessage extends StatefulWidget {
@@ -9,9 +11,16 @@ class SendMessage extends StatefulWidget {
 
 class _SendMessageState extends State<SendMessage> {
   String message = '';
-
-  void send() {
+  final controller = TextEditingController();
+  Future<void> send()async {
     FocusScope.of(context).unfocus();
+    final user =  FirebaseAuth.instance.currentUser;
+    FirebaseFirestore.instance.collection("chat").add({
+      "text": message,
+      "createdAt": Timestamp.now(),
+      "userId": user!.uid,
+    });
+    controller.clear();
   }
 
   @override
@@ -34,6 +43,7 @@ class _SendMessageState extends State<SendMessage> {
                 ),
               ),
               child: TextField(
+                controller: controller,
                 decoration: const InputDecoration(
                   border: InputBorder.none,
                   hintText: "Send a message",
@@ -56,8 +66,9 @@ class _SendMessageState extends State<SendMessage> {
               color: Colors.deepPurple,
             ),
             child: IconButton(
-                icon: const Icon(Icons.send, color: Colors.white),
-                onPressed: message.trim().isEmpty ? () {} : send),
+              icon: const Icon(Icons.send, color: Colors.white),
+              onPressed: message.trim().isEmpty ? () {} : send,
+            ),
           ),
         ],
       ),
